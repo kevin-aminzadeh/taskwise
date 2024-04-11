@@ -7,6 +7,10 @@ import {
 	Text,
 	View,
 } from 'react-native';
+import {
+	SafeAreaProvider,
+	useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 import TitleBar from './src/components/core/TitleBar';
 import './src/styles/global.css';
 import TodoList from './src/components/core/TodoList';
@@ -17,12 +21,14 @@ const DUMMY_DATA = [
 	{ id: '3', text: 'Learn GraphQL', status: 'completed' },
 ];
 
-function App() {
+function HomeScreen() {
+	const safeAreaInsets = useSafeAreaInsets();
+
 	return (
 		<View
 			className='bg-[#1C1D21] flex-1 justify-between items-between flex flex-col'
 			style={{
-				paddingTop: Platform.OS === 'android' ? 25 : 0,
+				paddingTop: safeAreaInsets.top,
 			}}
 		>
 			<StatusBar style='light' />
@@ -42,6 +48,14 @@ function App() {
 				</Pressable>
 			</View>
 		</View>
+	);
+}
+
+function App() {
+	return (
+		<SafeAreaProvider>
+			<HomeScreen />
+		</SafeAreaProvider>
 	);
 }
 
