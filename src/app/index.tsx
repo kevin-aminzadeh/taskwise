@@ -6,31 +6,12 @@ import { Pressable, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Svg, { Path } from "react-native-svg";
 
-import TitleBar from "../components/core/TitleBar";
-import TodoList from "../components/core/TodoList";
-
-const DUMMY_DATA = [
-  {
-    id: "1",
-    title: "Learn React Native",
-    description: "Learn how to build mobile apps with React Native",
-    status: "active",
-  },
-  {
-    id: "2",
-    title: "Learn TypeScript",
-    description: "Learn how to write type-safe code with TypeScript",
-    status: "active",
-  },
-  {
-    id: "3",
-    title: "Learn GraphQL",
-    description: "Learn how to build APIs with GraphQL",
-    status: "completed",
-  },
-];
+import TitleBar from "../components/core/title-bar";
+import TodoList from "../components/core/todo-list";
+import { useTodosContext } from "../context/todos-context";
 
 function Page() {
+  const { todos } = useTodosContext();
   const safeAreaInsets = useSafeAreaInsets();
 
   return (
@@ -45,7 +26,7 @@ function Page() {
 
       {/* Main Content */}
       <View className="flex-1 px-8">
-        <TodoList todos={DUMMY_DATA} />
+        <TodoList todos={todos} />
       </View>
 
       {/* Bottom Nav */}

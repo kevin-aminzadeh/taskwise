@@ -4,7 +4,7 @@ import { Keyboard, Pressable, Text, TextInput, TouchableWithoutFeedback, View } 
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Path, Svg } from "react-native-svg";
 
-import TitleBar from "../../components/core/TitleBar";
+import TitleBar from "../../components/core/title-bar";
 
 function Page() {
   const safeAreaInsets = useSafeAreaInsets();
@@ -27,7 +27,7 @@ function Page() {
             <Text className="text-white text-xl pb-3">Title</Text>
             <TextInput
               editable
-              placeholder="Enter title"
+              placeholder="Type the task title here"
               className="text-white placeholder:text-[#505050] focus:placeholder:text-transparent bg-[#2A2A2A] rounded-xl px-6 py-3"
             />
           </View>
@@ -35,7 +35,7 @@ function Page() {
             <Text className="text-white text-xl pb-3">Description</Text>
             <TextInput
               editable
-              placeholder="Enter description"
+              placeholder="Type the task description here"
               className="text-white placeholder:text-[#505050] focus:placeholder:text-transparent bg-[#2A2A2A] rounded-xl px-6 pt-3 pb-3 align-middle"
               multiline
             />

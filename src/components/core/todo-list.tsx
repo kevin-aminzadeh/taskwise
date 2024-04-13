@@ -1,12 +1,5 @@
 import { FlatList, Text, View } from "react-native";
 
-type Todo = {
-  id: string;
-  title: string;
-  description?: string;
-  status: "active" | "completed";
-};
-
 function TodoItem({ todo, className }: { todo: Todo; className?: string }) {
   return (
     <View
@@ -35,7 +28,9 @@ function TodoList({ todos }: { todos: Todo[] }) {
           keyExtractor={(item) => item.id}
         />
       ) : (
-        <Text className="text-white">No todos</Text>
+        <View className="flex-1 justify-center items-center">
+          <Text className="text-[#505050]  text-lg">No todos yet!</Text>
+        </View>
       )}
     </>
   );
