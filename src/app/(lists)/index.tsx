@@ -1,11 +1,10 @@
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+
 import TitleBar from "../../components/core/title-bar";
-import { useTasksContext } from "../../context/tasks-context";
 import ProjectList from "../../components/projects/project-list";
 
 function Page() {
-  const { tasks } = useTasksContext();
   const safeAreaInsets = useSafeAreaInsets();
 
   return (

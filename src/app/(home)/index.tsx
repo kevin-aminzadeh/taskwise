@@ -1,11 +1,11 @@
-import { StatusBar } from "expo-status-bar";
-import { Pressable, Text, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useTasksContext } from "../../context/tasks-context";
-import TitleBar from "../../components/core/title-bar";
-import TaskList from "../../components/tasks/task-list";
 import { Octicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
+import { Pressable, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+
+import TitleBar from "../../components/core/title-bar";
+import TaskList from "../../components/tasks/task-list";
+import { useTasksContext } from "../../context/tasks-context";
 
 function Page() {
   const { tasks } = useTasksContext();

@@ -1,8 +1,9 @@
 import { Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useTasksContext } from "../../context/tasks-context";
+
 import TitleBar from "../../components/core/title-bar";
 import TaskList from "../../components/tasks/task-list";
+import { useTasksContext } from "../../context/tasks-context";
 
 function Page() {
   const { tasks } = useTasksContext();
@@ -15,7 +16,7 @@ function Page() {
         paddingTop: safeAreaInsets.top,
       }}
     >
-      <TitleBar title="Archive" showBackButton={true} />
+      <TitleBar title="Archive" showBackButton />
 
       <View className="flex-1 px-2 h-full rounded-xl overflow-visible">
         {/* "Completed" badge */}

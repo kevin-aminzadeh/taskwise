@@ -1,6 +1,7 @@
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const DUMMY_DATA: Tasks = {
   "1": {
     createdAt: 1632800000000,
@@ -105,8 +106,7 @@ const sortTasksByDateCreated = (obj: Tasks) => {
 
 const useTasks = () => {
   const [tasks, setTasks] = useState<Tasks | undefined>();
-  const { getItem, setItem, mergeItem, removeItem } =
-    useAsyncStorage("tasks");
+  const { getItem, setItem } = useAsyncStorage("tasks");
 
   const writeDataToStorage = async (data: Tasks) => {
     await setItem(JSON.stringify(data));
@@ -129,7 +129,7 @@ const useTasks = () => {
       }
     };
     readDataFromStorage();
-  }, []);
+  }, [getItem]);
 
   return {
     tasks,

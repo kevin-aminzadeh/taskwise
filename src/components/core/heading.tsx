@@ -1,5 +1,5 @@
-import { Text } from "react-native";
 import classnames from "classnames";
+import { Text } from "react-native";
 
 function mapSizeToClassName(size: string) {
   switch (size) {

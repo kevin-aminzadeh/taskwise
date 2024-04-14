@@ -1,11 +1,10 @@
-import { StatusBar } from "expo-status-bar";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import {
   Keyboard,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 import TitleBar from "../../components/core/title-bar";
 import NewTaskForm from "../../components/tasks/new-task-form";

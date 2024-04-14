@@ -1,16 +1,17 @@
+import { Octicons } from "@expo/vector-icons";
+import { useIsFocused } from "@react-navigation/native";
 import { Link } from "expo-router";
+import { useEffect, useState } from "react";
 import {
   Pressable,
   Text,
   TextInput,
   View,
 } from "react-native";
-import { useEffect, useState } from "react";
-import { useIsFocused } from "@react-navigation/native";
 import Toast from "react-native-root-toast";
-import colors from "tailwindcss/colors";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Octicons } from "@expo/vector-icons";
+import colors from "tailwindcss/colors";
+
 import { useTasksContext } from "../../context/tasks-context";
 
 function NewTaskForm() {
@@ -57,7 +58,7 @@ function NewTaskForm() {
     if (dirty || (!title && !description)) return;
 
     setDirty(true);
-  }, [title, description]);
+  }, [title, description, dirty]);
 
   useEffect(() => {
     if (!valid) return;
@@ -97,7 +98,14 @@ function NewTaskForm() {
     }
 
     setSubmitting(false);
-  }, [valid, submitting]);
+  }, [
+    valid,
+    submitting,
+    addTask,
+    title,
+    description,
+    safeAreaInsets.top,
+  ]);
 
   return (
     <View className="flex flex-col flex-1 w-full">
@@ -118,7 +126,7 @@ function NewTaskForm() {
               className="text-white placeholder:text-neutral-content font-medium text-3xl 
                  pb-2"
               textAlignVertical="top"
-              autoFocus={true}
+              autoFocus
               onChangeText={(text) => {
                 setTitle(text);
                 setError("");

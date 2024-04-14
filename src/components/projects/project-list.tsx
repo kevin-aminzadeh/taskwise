@@ -1,18 +1,19 @@
+import { Octicons } from "@expo/vector-icons";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import classNames from "classnames";
+import * as Haptics from "expo-haptics";
+import { useMemo, useRef } from "react";
 import {
   FlatList,
   Pressable,
   Text,
   View,
 } from "react-native";
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-import colors from "../../theme/colors";
 import ConfettiCannon from "react-native-confetti-cannon";
-import { useTasksContext } from "../../context/tasks-context";
-import { useMemo, useRef } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import classNames from "classnames";
-import { Octicons } from "@expo/vector-icons";
-import * as Haptics from "expo-haptics";
+
+import { useTasksContext } from "../../context/tasks-context";
+import colors from "../../theme/colors";
 
 function ProjectItem({
   task,
@@ -66,7 +67,7 @@ function ProjectList({
   const tabBarHeight = useBottomTabBarHeight();
   const { top, left } = useSafeAreaInsets();
   const { updateTask } = useTasksContext();
-  let confettiRef = useRef(null);
+  const confettiRef = useRef(null);
 
   const projectList = useMemo(() => {
     if (!projects || !Object.keys(projects).length)
@@ -94,7 +95,7 @@ function ProjectList({
           count={150}
           origin={{ x: left - 100, y: top }}
           ref={confettiRef}
-          fadeOut={true}
+          fadeOut
           autoStart={false}
           explosionSpeed={300}
           fallSpeed={800}
