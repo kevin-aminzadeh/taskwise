@@ -1,13 +1,7 @@
 import { Octicons } from "@expo/vector-icons";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-import classNames from "classnames";
 import * as Haptics from "expo-haptics";
-import {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useMemo, useRef } from "react";
 import {
   FlatList,
   Pressable,
@@ -15,21 +9,13 @@ import {
   View,
 } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
-import Animated, {
-  FadeOut,
-  interpolate,
-  SlideInUp,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-  ZoomIn,
-  ZoomOut,
-} from "react-native-reanimated";
+import Toast from "react-native-root-toast";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import defaultColors from "tailwindcss/colors";
 
-import { useTasksContext } from "../../context/tasks-context";
-import colors from "../../theme/colors";
 import TaskItem from "./task-item";
+import { useTasksContext } from "../../context/tasks-context";
+import themeColors from "../../theme/colors";
 
 function TaskList({
   tasks,
@@ -40,7 +26,8 @@ function TaskList({
 }) {
   const tabBarHeight = useBottomTabBarHeight();
   const { top, left } = useSafeAreaInsets();
-  const { updateTask } = useTasksContext();
+  const { updateTask, deleteTask } = useTasksContext();
+  const safeAreaInset = useSafeAreaInsets();
   const confettiRef = useRef(null);
 
   const taskList = useMemo(() => {
@@ -106,6 +93,43 @@ function TaskList({
                   confettiRef.current.start();
                 }
               }}
+              renderRightActions={() => {
+                return (
+                  <Pressable
+                    className="h-full flex items-center justify-center w-20"
+                    onPress={() => {
+                      deleteTask(item.id);
+                      Toast.show(
+                        "Task deleted successfully!",
+                        {
+                          duration: Toast.durations.SHORT,
+                          position: safeAreaInset.top,
+                          shadow: true,
+                          animation: true,
+                          hideOnPress: true,
+                          delay: 0,
+                          containerStyle: {
+                            backgroundColor:
+                              defaultColors.green[500],
+                            width: "100%",
+                            display: "flex",
+                            flexDirection: "row",
+                            paddingHorizontal: 16,
+                            flex: 1,
+                            flexGrow: 1,
+                          },
+                        },
+                      );
+                    }}
+                  >
+                    <Octicons
+                      name="trash"
+                      size={24}
+                      color="#FF5861"
+                    />
+                  </Pressable>
+                );
+              }}
             />
           )}
           keyExtractor={(item) => item.id}
@@ -123,7 +147,7 @@ function TaskList({
             className="text-lg text-center px-6"
             style={{
               textAlign: "center",
-              color: colors["neutral-content"],
+              color: themeColors["neutral-content"],
             }}
           >
             Create a new task to start your productivity
