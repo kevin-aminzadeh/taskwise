@@ -1,6 +1,6 @@
 import { Octicons } from "@expo/vector-icons";
 import classNames from "classnames";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Pressable, Text, View } from "react-native";
 import Animated, {
   FadeOut,
@@ -9,6 +9,8 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
+  ZoomIn,
+  ZoomOut,
 } from "react-native-reanimated";
 
 import colors from "../../theme/colors";
@@ -32,17 +34,20 @@ function TaskItem({
     setCollapsed(!collapsed);
   };
 
-  const toggleAnimationValue = (collapsed: boolean) => {
-    if (collapsed) {
-      animatedContentHeightValue.value = withTiming(1, {
-        duration: 200,
-      });
-    } else {
-      animatedContentHeightValue.value = withTiming(0, {
-        duration: 200,
-      });
-    }
-  };
+  const toggleAnimationValue = useCallback(
+    (collapsed: boolean) => {
+      if (collapsed) {
+        animatedContentHeightValue.value = withTiming(1, {
+          duration: 200,
+        });
+      } else {
+        animatedContentHeightValue.value = withTiming(0, {
+          duration: 200,
+        });
+      }
+    },
+    [animatedContentHeightValue],
+  );
 
   const animatedContentHeight = useAnimatedStyle(() => {
     const height = interpolate(
@@ -82,7 +87,7 @@ function TaskItem({
     if (task.status !== "completed") return;
 
     setShowChecked(true);
-  }, []);
+  }, [task.status]);
 
   return (
     <Animated.View
@@ -161,7 +166,14 @@ function TaskItem({
                 }}
                 className="flex flex-row w-full pl-6"
               >
-                <Text className="text-neutral-content">
+                <Text
+                  className={classNames(
+                    "text-neutral-content",
+                    task.status === "completed"
+                      ? "line-through "
+                      : "",
+                  )}
+                >
                   {task.description}
                 </Text>
               </View>
