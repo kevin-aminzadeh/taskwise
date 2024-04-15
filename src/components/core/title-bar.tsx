@@ -18,9 +18,10 @@ function TitleBar({
   showBackButton = false,
 }: TitleBarProps) {
   return (
-    <View className="w-full flex flex-col justify-center items-start py-12 px-8 gap-3">
+    <View className="w-full flex flex-col justify-center items-start py-12 pr-8 gap-3">
       {subtitle && (
         <Heading
+          className="pl-8"
           text={subtitle}
           variant="subtitle"
           size="xl"
@@ -31,7 +32,7 @@ function TitleBar({
       <View className="flex flex-row items-top justify-between w-full">
         {showBackButton ? (
           <Link href="/" asChild>
-            <Pressable className="flex flex-row items-center gap-6">
+            <Pressable className="flex flex-row items-center gap-6 pl-8">
               <Octicons
                 name="chevron-left"
                 size={24}
@@ -41,7 +42,11 @@ function TitleBar({
             </Pressable>
           </Link>
         ) : (
-          <Heading text={title} size="4xl" />
+          <Heading
+            text={title}
+            size="4xl"
+            className="pl-8"
+          />
         )}
 
         {secondaryNav && secondaryNav}
