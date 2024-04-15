@@ -7,7 +7,3 @@ interface Task {
   description?: string;
   status: "active" | "completed";
 }
-
-interface Tasks {
-  [key: string]: Task;
-}

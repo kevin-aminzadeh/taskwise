@@ -137,10 +137,11 @@ const TaskItem: React.FC<{
                 <View className="flex flex-row w-full justify-between px-6">
                   <Text
                     className={classNames(
-                      "text-lg font-bold line-clamp-1",
+                      "text-lg font-bold",
                       task.status === "completed"
                         ? "line-through text-neutral-content"
                         : "text-white",
+                      collapsed ? "" : "line-clamp-1",
                     )}
                   >
                     {task.title}

@@ -22,7 +22,7 @@ function TaskList({
   view = "all",
   emptyListMessage = "No tasks found",
 }: {
-  tasks: Tasks;
+  tasks: Task[];
   view?: "all" | "completed" | "active";
   emptyListMessage?: string;
 }) {
@@ -33,15 +33,12 @@ function TaskList({
   const confettiRef = useRef(null);
 
   const taskList = useMemo(() => {
-    if (!tasks || !Object.keys(tasks).length)
-      return [] as Task[];
+    if (!tasks?.length) return [] as Task[];
 
     const data =
       view === "all"
-        ? Object.values(tasks)
-        : Object.values(tasks).filter(
-            (task) => task.status === view,
-          );
+        ? tasks
+        : tasks.filter((task) => task.status === view);
 
     return data;
   }, [tasks, view]);
@@ -64,7 +61,7 @@ function TaskList({
           fallSpeed={800}
         />
       </View>
-      {taskList && taskList.length ? (
+      {taskList?.length ? (
         <FlatList
           data={taskList}
           renderItem={({ item, index }) => (

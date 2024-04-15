@@ -7,7 +7,7 @@ interface AddTaskPayload
   extends Omit<Task, "id" | "createdAt" | "updatedAt"> {}
 
 type TasksContextType = {
-  tasks: Tasks;
+  tasks: Task[];
   addTask: (task: AddTaskPayload) => void;
   updateTask: (task: Task) => void;
   deleteTask: (id: string) => void;
@@ -37,38 +37,44 @@ function TasksProvider({
   const addTask = (task: AddTaskPayload) => {
     const newItemId = Crypto.randomUUID();
     const newTask = {
-      [newItemId]: {
-        ...task,
-        id: newItemId,
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
-      },
+      ...task,
+      id: newItemId,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
     };
 
-    setTasks({ ...tasks, ...newTask });
+    setTasks([...tasks, newTask]);
   };
 
   const updateTask = (task: Task) => {
-    if (!tasks || !tasks[task.id]) return;
+    if (
+      !tasks ||
+      !tasks.find(
+        (existingTask: Task) => existingTask.id === task.id,
+      )
+    )
+      return;
 
-    const updatedTasks = {
-      ...tasks,
-      [task.id]: { ...task, updatedAt: Date.now() },
-    };
+    const updatedTasks = [
+      ...tasks.filter(
+        (existingTask) => existingTask.id !== task.id,
+      ),
+      { ...task, updatedAt: Date.now() },
+    ];
 
     setTasks(updatedTasks);
   };
 
   const deleteTask = (id: string) => {
-    if (!tasks || !Object.keys(tasks).length || !tasks[id])
+    if (
+      !tasks?.length ||
+      !tasks.find((task) => task.id === id)
+    )
       return;
 
-    const filteredTasks = Object.keys(tasks)
-      .filter((key) => key !== id)
-      .reduce((newTasksObj, key) => {
-        newTasksObj[key] = tasks[key];
-        return newTasksObj;
-      }, {} as Tasks);
+    const filteredTasks = tasks.filter(
+      (task: Task) => task.id !== id,
+    );
 
     setTasks(filteredTasks);
   };

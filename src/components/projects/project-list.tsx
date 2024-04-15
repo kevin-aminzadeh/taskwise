@@ -61,7 +61,7 @@ function ProjectList({
   projects,
   view = "all",
 }: {
-  projects: Tasks;
+  projects: Task[];
   view?: "all" | "completed" | "active";
 }) {
   const tabBarHeight = useBottomTabBarHeight();
@@ -70,13 +70,12 @@ function ProjectList({
   const confettiRef = useRef(null);
 
   const projectList = useMemo(() => {
-    if (!projects || !Object.keys(projects).length)
-      return [] as Task[];
+    if (!projects?.length) return [] as Task[];
 
     const data =
       view === "all"
-        ? Object.values(projects)
-        : Object.values(projects).filter(
+        ? projects
+        : projects.filter(
             (project) => project.status === view,
           );
 

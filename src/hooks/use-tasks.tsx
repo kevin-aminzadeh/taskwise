@@ -3,24 +3,24 @@ import { useEffect, useState } from "react";
 
 import { SEED_DATA } from "../constants";
 
-const sortTasksByDateCreated = (obj: Tasks) => {
-  // Sort tasks by date created and return Tasks object
-  const sortedTaskKeys = Object.values(obj).sort(
-    (a, b) => b.createdAt - a.createdAt,
-  );
-  const sortedTasks = sortedTaskKeys.reduce((acc, task) => {
-    acc[task.id] = task;
-    return acc;
-  }, {} as Tasks);
+const sortTasksByDateCreated = (tasks: Task[]) => {
+  // Sort tasks by dateCreated timestamp
+
+  if (!tasks.length) return [];
+
+  const sortedTasks = tasks
+    .sort((a, b) => a.createdAt - b.createdAt)
+    .reverse();
 
   return sortedTasks;
 };
 
 const useTasks = () => {
-  const [tasks, setTasks] = useState<Tasks | undefined>();
-  const { getItem, setItem } = useAsyncStorage("tasks");
+  const [tasks, setTasks] = useState<Task[] | undefined>();
+  const { getItem, setItem, removeItem } =
+    useAsyncStorage("tasks");
 
-  const writeDataToStorage = async (data: Tasks) => {
+  const writeDataToStorage = async (data: Task[]) => {
     await setItem(JSON.stringify(data));
 
     const sortedData = sortTasksByDateCreated(data);
@@ -34,7 +34,10 @@ const useTasks = () => {
       // Seed dummy data to storage
       // setItem(JSON.stringify(SEED_DATA));
 
-      if (data) {
+      // Clear data
+      // removeItem();
+
+      if (data?.length) {
         const parsedData = JSON.parse(data);
 
         const sortedData =
@@ -42,6 +45,7 @@ const useTasks = () => {
         setTasks(sortedData);
       }
     };
+
     readDataFromStorage();
   }, []);
 
