@@ -13,16 +13,18 @@ import Toast from "react-native-root-toast";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import defaultColors from "tailwindcss/colors";
 
-import TaskItem from "./task-item";
 import { useTasksContext } from "../../context/tasks-context";
 import themeColors from "../../theme/colors";
+import { TaskItem } from "./task-item";
 
 function TaskList({
   tasks,
   view = "all",
+  emptyListMessage = "No tasks found",
 }: {
   tasks: Tasks;
   view?: "all" | "completed" | "active";
+  emptyListMessage?: string;
 }) {
   const tabBarHeight = useBottomTabBarHeight();
   const { top, left } = useSafeAreaInsets();
@@ -150,8 +152,7 @@ function TaskList({
               color: themeColors["neutral-content"],
             }}
           >
-            Create a new task to start your productivity
-            journey! 🤓
+            {emptyListMessage}
           </Text>
         </View>
       )}
