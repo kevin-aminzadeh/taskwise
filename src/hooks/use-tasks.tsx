@@ -129,7 +129,7 @@ const useTasks = () => {
       }
     };
     readDataFromStorage();
-  }, [getItem]);
+  }, []);
 
   return {
     tasks,
