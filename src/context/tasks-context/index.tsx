@@ -41,6 +41,7 @@ function TasksProvider({
         ...task,
         id: newItemId,
         createdAt: Date.now(),
+        updatedAt: Date.now(),
       },
     };
 
