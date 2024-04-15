@@ -4,6 +4,7 @@ module.exports = {
   rules: {
     // Ensures props and state inside functions are always up-to-date
     "react-hooks/exhaustive-deps": "warn",
+    "import/order": "off",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
   },
