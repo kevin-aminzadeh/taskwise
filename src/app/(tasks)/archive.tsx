@@ -27,7 +27,11 @@ function Page() {
             </Text>
           </View>
         </View>
-        <TaskList tasks={tasks} view="completed" />
+        <TaskList
+          tasks={tasks}
+          view="completed"
+          emptyListMessage="Tasks marked as completed will appear here"
+        />
       </View>
     </View>
   );

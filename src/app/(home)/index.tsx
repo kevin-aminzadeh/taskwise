@@ -34,7 +34,11 @@ function Page() {
       />
 
       <View className="flex-1 px-2 h-full rounded-xl overflow-visible">
-        <TaskList tasks={tasks} view="active" />
+        <TaskList
+          tasks={tasks}
+          view="active"
+          emptyListMessage="Create a new task to start your productivity journey! 🤓"
+        />
       </View>
     </View>
   );
