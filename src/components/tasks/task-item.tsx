@@ -107,7 +107,7 @@ const TaskItem: React.FC<{
       <Animated.View entering={SlideInUp} exiting={FadeOut}>
         <Swipeable renderRightActions={renderRightActions}>
           <View
-            className={`bg-base-100 py-6 rounded-xl  w-full flex flex-row items-center justify-start overflow-hidden ${className}`}
+            className={`bg-base-100 px-2 py-6 rounded-xl  w-full flex flex-row items-center justify-start overflow-hidden ${className}`}
           >
             <Pressable
               className="pl-6"
@@ -132,8 +132,8 @@ const TaskItem: React.FC<{
               </View>
             </Pressable>
 
-            <View className="w-full flex flex-col pr-10">
-              <View className="flex flex-col items-start justify-between">
+            <View className="w-full flex flex-col pr-8">
+              <View className="flex flex-col items-start justify-center">
                 <View className="flex flex-row w-full justify-between px-6">
                   <Text
                     className={classNames(
@@ -184,10 +184,9 @@ const TaskItem: React.FC<{
                     >
                       <Text
                         className={classNames(
-                          "text-neutral-content",
                           task.status === "completed"
-                            ? "line-through "
-                            : "",
+                            ? "line-through text-neutral-content"
+                            : "text-gray-400",
                         )}
                       >
                         {task.description}

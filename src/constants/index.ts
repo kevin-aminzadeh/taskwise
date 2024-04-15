@@ -3,9 +3,9 @@ export const SEED_DATA: Tasks = {
     createdAt: 1632800000000,
     updatedAt: 1632800000000,
     id: "1",
-    title: "Learn React Native!!!",
+    title: "Implement notification service alerts",
     description:
-      "Learn how to build mobile apps with React Native",
+      "Integrate notification system's dead letter queue with alerting service for real-time monitoring and better observability.",
     status: "active",
   },
   "2": {
