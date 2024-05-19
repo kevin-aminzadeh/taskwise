@@ -8,7 +8,10 @@ module.exports = {
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
   },
-  plugins: ["simple-import-sort"],
+  plugins: [
+    "simple-import-sort",
+    "plugin:jsonc/recommended-with-jsonc",
+  ],
   parserOptions: {
     sourceType: "module",
     ecmaVersion: "latest",

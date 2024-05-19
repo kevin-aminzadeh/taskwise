@@ -1,5 +1,12 @@
 {
   "editor.formatOnSave": true,
   "eslint.format.enable": false,
-  "prettier.enable": true
+  "prettier.enable": true,
+  // JSON Formats added for eslint-plugin-jsonc
+  "eslint.validate": [
+    "javascriptreact",
+    "json",
+    "jsonc",
+    "json5"
+  ]
 }
